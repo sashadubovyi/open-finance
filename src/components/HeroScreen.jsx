@@ -1,4 +1,4 @@
-import { ShieldCheck, Gift, ArrowRight, Globe2 } from 'lucide-react'
+import { ShieldCheck, Gift, ArrowRight, Globe2, TriangleAlert } from 'lucide-react'
 
 export default function HeroScreen({ onStart }) {
   return (
@@ -25,7 +25,7 @@ export default function HeroScreen({ onStart }) {
           Пройдите короткий тест за 45 секунд, определите свой денежный потенциал и заберите
           гарантированный подарок:{' '}
           <span className="text-slate-900 font-medium">
-            Видео-урок «Как новичку сделать первые $500 на акциях мировых брендов без риска»
+            Видео-урок «Как новичку сделать первые $500 на акциях мировых брендов»
           </span>
         </p>
 
@@ -37,6 +37,15 @@ export default function HeroScreen({ onStart }) {
             Мы предлагаем уникальные международные инвестиционные инструменты, которые сейчас
             закрыты и абсолютно недоступны у любого другого брокера в РФ. Прямой доступ к
             глобальным рынкам.
+          </p>
+        </div>
+
+        <div className="flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-3">
+          <TriangleAlert className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" strokeWidth={2} />
+          <p className="text-[12px] leading-snug text-amber-800">
+            Торговля с использованием кредитного плеча несёт высокий риск потери вложенных
+            средств вплоть до полной суммы. Результаты в прошлом не гарантируют результат в
+            будущем.
           </p>
         </div>
       </div>

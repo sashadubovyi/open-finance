@@ -20,7 +20,7 @@ export default function ResultScreen({ answers, lead }) {
       </h2>
 
       <p className="text-[14px] text-slate-500 leading-relaxed max-w-sm mb-7">
-        С нами вы точно достигнете своих целей. Ваш персональный аналитик уже готовит для вас
+        Мы поможем вам двигаться к своим целям. Ваш персональный аналитик уже готовит для вас
         детальный план и свяжется с вами в ближайшее время.
       </p>
 
@@ -28,14 +28,15 @@ export default function ResultScreen({ answers, lead }) {
         <div className="flex items-center justify-center gap-2 mb-2">
           <TrendingUp className="w-4 h-4 text-blue-600" strokeWidth={2} />
           <span className="text-[12px] font-semibold uppercase tracking-wide text-blue-600">
-            Ваш потенциальный доход за год
+            Иллюстративный расчёт на год
           </span>
         </div>
         <div className="text-[36px] font-extrabold text-slate-900 tabular-nums leading-tight">
           ${currencyFormatter.format(projectedYearlyIncome)}
         </div>
         <p className="text-[12px] text-slate-500 mt-2">
-          При выбранной стратегии и стартовом капитале
+          При выбранной стратегии и стартовом капитале. Это гипотетический пример, не гарантия
+          дохода — торговля с плечом может привести к потере вложенных средств.
         </p>
       </div>
 
