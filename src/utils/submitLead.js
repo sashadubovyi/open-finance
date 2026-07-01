@@ -1,4 +1,10 @@
-const GAS_WEB_APP_URL = import.meta.env.VITE_GAS_WEB_APP_URL
+// Deployed Apps Script Web App proxy (apps-script/Code.gs). Not a secret —
+// it's designed to be called directly from the browser. Overridable via
+// VITE_GAS_WEB_APP_URL for staging/alternate deployments.
+const DEFAULT_GAS_WEB_APP_URL =
+  'https://script.google.com/macros/s/AKfycbykuXmlSevlvTpbnlWpf8gkPBMD5WexBUML06fDqWl_eUHVWjrjeQ6tb1J6GpXbbx7lXA/exec'
+
+const GAS_WEB_APP_URL = import.meta.env.VITE_GAS_WEB_APP_URL || DEFAULT_GAS_WEB_APP_URL
 
 /**
  * Sends the lead payload to the Google Apps Script Web App proxy, which
