@@ -9,7 +9,7 @@ export default function HeroScreen({ onStart }) {
             <ShieldCheck className="w-5 h-5 text-blue-600" strokeWidth={2} />
           </div>
           <span className="text-sm font-bold tracking-widest text-slate-800 uppercase">
-            Otkritie Broker <span className="text-slate-400">LTD.</span>
+            Финансовый <span className="text-slate-400">План</span>
           </span>
         </div>
 

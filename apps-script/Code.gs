@@ -1,5 +1,5 @@
 /**
- * OTKRITIE BROKER LTD. — Lead capture proxy.
+ * Финансовый план — Lead capture proxy.
  *
  * Deployed as a Google Apps Script Web App, this script receives the quiz
  * lead payload from the React frontend and forwards it to a Telegram chat
@@ -41,7 +41,7 @@ function doPost(e) {
 
 function doGet() {
   return ContentService.createTextOutput(
-    JSON.stringify({ ok: true, status: 'OTKRITIE BROKER lead proxy is running' })
+    JSON.stringify({ ok: true, status: 'Finance Plan lead proxy is running' })
   ).setMimeType(ContentService.MimeType.JSON)
 }
 
@@ -62,7 +62,7 @@ function buildTelegramMessage(data) {
   var budget = escapeValue(data.budget)
 
   return (
-    '=== НОВАЯ ЗАЯВКА: OTKRITIE BROKER ===\n' +
+    '=== НОВАЯ ЗАЯВКА: ФИНАНСОВЫЙ ПЛАН ===\n' +
     'Имя: ' + name + '\n' +
     'Телефон: ' + phone + '\n' +
     'E-mail: ' + email + '\n' +

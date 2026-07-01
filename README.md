@@ -1,4 +1,4 @@
-# OTKRITIE BROKER LTD. — Quiz Landing Page
+# Финансовый план — Quiz Landing Page
 
 Premium, mobile-first quiz landing page for lead generation, built with React + Vite + Tailwind CSS. Leads are sent to Telegram through a Google Apps Script proxy (`apps-script/Code.gs`) to avoid direct browser calls to the Telegram API.
 

@@ -42,7 +42,7 @@ export default function ResultScreen({ answers, lead }) {
       <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white shadow-sm px-4 py-3 max-w-sm">
         <MessageCircle className="w-4 h-4 text-blue-600 shrink-0" strokeWidth={2} />
         <p className="text-[13px] text-slate-600 text-left leading-snug">
-          Держите телефон под рукой — аналитик OTKRITIE BROKER LTD. свяжется с вами в течение
+          Держите телефон под рукой — аналитик «Финансовый план» свяжется с вами в течение
           15 минут.
         </p>
       </div>
