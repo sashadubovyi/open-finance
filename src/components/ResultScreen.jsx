@@ -1,0 +1,51 @@
+import { CheckCircle2, TrendingUp, MessageCircle } from 'lucide-react'
+
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 0,
+})
+
+export default function ResultScreen({ answers, lead }) {
+  const budgetValue = answers.budget?.value ?? 0
+  const percentValue = answers.yield?.value ?? 0
+  const projectedYearlyIncome = budgetValue * percentValue * 0.1
+
+  return (
+    <div className="min-h-[100dvh] flex flex-col items-center justify-center px-5 py-10 text-center animate-fade-in">
+      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
+        <CheckCircle2 className="w-8 h-8 text-emerald-400" strokeWidth={1.75} />
+      </div>
+
+      <h2 className="text-[22px] font-extrabold text-white leading-snug mb-3 max-w-sm">
+        Вы сделали большой шаг навстречу финансовой стабильности{lead?.name ? `, ${lead.name}` : ''}!
+      </h2>
+
+      <p className="text-[14px] text-slate-400 leading-relaxed max-w-sm mb-7">
+        С нами вы точно достигнете своих целей. Ваш персональный аналитик уже готовит для вас
+        детальный план и свяжется с вами в ближайшее время.
+      </p>
+
+      <div className="w-full max-w-sm rounded-2xl border border-gold-500/30 bg-gradient-to-b from-gold-500/10 to-transparent p-5 mb-6">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <TrendingUp className="w-4 h-4 text-gold-400" strokeWidth={2} />
+          <span className="text-[12px] font-semibold uppercase tracking-wide text-gold-400">
+            Ваш потенциальный доход за год
+          </span>
+        </div>
+        <div className="text-[36px] font-extrabold text-white tabular-nums leading-tight">
+          ${currencyFormatter.format(projectedYearlyIncome)}
+        </div>
+        <p className="text-[12px] text-slate-500 mt-2">
+          При выбранной стратегии и стартовом капитале
+        </p>
+      </div>
+
+      <div className="flex items-center gap-2.5 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 max-w-sm">
+        <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" strokeWidth={2} />
+        <p className="text-[13px] text-slate-400 text-left leading-snug">
+          Держите телефон под рукой — аналитик OTKRITIE BROKER LTD. свяжется с вами в течение
+          15 минут.
+        </p>
+      </div>
+    </div>
+  )
+}
