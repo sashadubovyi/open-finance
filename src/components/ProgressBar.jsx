@@ -7,11 +7,11 @@ export default function ProgressBar({ step, total }) {
         <span className="text-xs font-medium tracking-wide text-slate-400">
           Шаг {step} из {total}
         </span>
-        <span className="text-xs font-semibold text-emerald-400">{Math.round(percent)}%</span>
+        <span className="text-xs font-semibold text-blue-600">{Math.round(percent)}%</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-slate-800/80 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-gold-400 transition-transform duration-500 ease-out will-change-transform origin-left"
+          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-sky-400 transition-transform duration-500 ease-out will-change-transform origin-left"
           style={{ transform: `scaleX(${percent / 100})`, width: '100%' }}
         />
       </div>
