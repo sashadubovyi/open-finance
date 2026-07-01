@@ -2,7 +2,7 @@
 // it's designed to be called directly from the browser. Overridable via
 // VITE_GAS_WEB_APP_URL for staging/alternate deployments.
 const DEFAULT_GAS_WEB_APP_URL =
-  'https://script.google.com/macros/s/AKfycbwWAn0Qapzv8cKDgkbHKZ5mxAfPjAm4m7wF9kRpoO5za31qgDElRGXMcgaKlUrEU5i05A/exec'
+  'https://script.google.com/macros/s/AKfycbxBx4xQsMPw5La2_N2m_Gv_Qhvi1-Hm1my6QOvw7Mp7y8mwpjiWNxIbEJJG59I6V62GRA/exec'
 
 const GAS_WEB_APP_URL = import.meta.env.VITE_GAS_WEB_APP_URL || DEFAULT_GAS_WEB_APP_URL
 
