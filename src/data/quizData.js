@@ -92,11 +92,24 @@ const fact3 = {
   text: 'Кредитное плечо увеличивает как потенциальную прибыль, так и потенциальный убыток пропорционально его размеру.',
 }
 
+// Real, dated single-day moves (sourced via web search); not a live feed —
+// shown with explicit dates so it reads as historical, not "happening now".
+export const MARKET_MOVES = [
+  { ticker: 'MU', change: '+14,6%', date: '24 июня 2026', note: 'после отчёта о прибыли' },
+  { ticker: 'META', change: '+8,55%', date: '30 апреля 2026', note: 'после квартального отчёта' },
+  { ticker: 'AMZN', change: '+3%', date: '29 июня 2026', note: 'на новостях об AWS' },
+  { ticker: 'AAPL', change: '+2,7%', date: '30 июня 2026' },
+  { ticker: 'NVDA', change: '+2,58%', date: '30 июня 2026' },
+  { ticker: 'NFLX', change: '+2,11%', date: '1 июля 2026' },
+  { ticker: 'SBER', change: '+1,07%', date: '26 июня 2026' },
+]
+
 export const QUIZ_FLOW = [
   { type: 'question', step: goalStep },
   { type: 'question', step: experienceStep },
   { type: 'fact', fact: fact1 },
   { type: 'question', step: instrumentsStep },
+  { type: 'market' },
   { type: 'question', step: timeStep },
   { type: 'fact', fact: fact2 },
   { type: 'question', step: horizonStep },
