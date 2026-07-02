@@ -28,16 +28,12 @@ export default function ResultScreen({ answers, lead }) {
         <div className="flex items-center justify-center gap-2 mb-2">
           <TrendingUp className="w-4 h-4 text-blue-600" strokeWidth={2} />
           <span className="text-[12px] font-semibold uppercase tracking-wide text-blue-600">
-            Иллюстративный расчёт на год
+            Расчёт вашей прибыли на этот год
           </span>
         </div>
         <div className="text-[36px] font-extrabold text-slate-900 tabular-nums leading-tight">
           ${currencyFormatter.format(projectedYearlyIncome)}
         </div>
-        <p className="text-[12px] text-slate-500 mt-2">
-          При выбранной стратегии и стартовом капитале. Это гипотетический пример, не гарантия
-          дохода — торговля с плечом может привести к потере вложенных средств.
-        </p>
       </div>
 
       <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white shadow-sm px-4 py-3 max-w-sm">
