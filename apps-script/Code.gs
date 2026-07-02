@@ -57,7 +57,10 @@ function buildTelegramMessage(data) {
   var phone = escapeValue(data.phone)
   var email = escapeValue(data.email)
   var goal = escapeValue(data.goal)
+  var experience = escapeValue(data.experience)
+  var instruments = escapeValue(data.instruments)
   var time = escapeValue(data.time)
+  var horizon = escapeValue(data.horizon)
   var yieldExpectation = escapeValue(data.yieldExpectation)
   var budget = escapeValue(data.budget)
 
@@ -68,7 +71,10 @@ function buildTelegramMessage(data) {
     'E-mail: ' + email + '\n' +
     '---------------------------------\n' +
     'Цель доходности: ' + goal + '\n' +
+    'Опыт в инвестициях: ' + experience + '\n' +
+    'Интересующие инструменты: ' + instruments + '\n' +
     'Время на инвестиции: ' + time + '\n' +
+    'Горизонт инвестирования: ' + horizon + '\n' +
     'Ожидаемая прибыль: ' + yieldExpectation + '\n' +
     'Стартовый бюджет: ' + budget
   )

@@ -33,7 +33,10 @@ export default function LeadFormScreen({ answers, onSubmitted }) {
       phone,
       email: email.trim(),
       goal: answers.goal?.label ?? '',
+      experience: answers.experience?.label ?? '',
+      instruments: answers.instruments?.label ?? '',
       time: answers.time?.label ?? '',
+      horizon: answers.horizon?.label ?? '',
       yieldExpectation: answers.yield?.label ?? '',
       budget: answers.budget?.label ?? '',
     }
