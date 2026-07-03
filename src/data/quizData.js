@@ -76,7 +76,7 @@ const budgetStep = {
   min: 100,
   max: 1000,
   step: 100,
-  defaultValue: 500,
+  defaultValue: 100,
 }
 
 const fact1 = {
