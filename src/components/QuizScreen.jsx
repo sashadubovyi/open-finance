@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, Check, CheckCircle2, ArrowRight, TrendingUp } from 'lucide-react'
 import ProgressBar from './ProgressBar.jsx'
 import { QUIZ_FLOW, FACT_ICON, MARKET_MOVES } from '../data/quizData.js'
@@ -8,6 +8,8 @@ const FACT_AUTO_ADVANCE_MS = 3200
 const MARKET_REVEAL_INTERVAL_MS = 550
 const MARKET_HOLD_MS = 2000
 
+const currencyFormatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 })
+
 export default function QuizScreen({ onComplete }) {
   const [flowIndex, setFlowIndex] = useState(0)
   const [answers, setAnswers] = useState({})
@@ -16,6 +18,7 @@ export default function QuizScreen({ onComplete }) {
   const [marketVisibleCount, setMarketVisibleCount] = useState(0)
   const [sliderValue, setSliderValue] = useState(0)
   const [budgetInput, setBudgetInput] = useState('')
+  const amountRef = useRef(null)
 
   const item = QUIZ_FLOW[flowIndex]
   const isLast = flowIndex === QUIZ_FLOW.length - 1
@@ -52,6 +55,14 @@ export default function QuizScreen({ onComplete }) {
     const value = Number(e.target.value)
     setSliderValue(value)
     setBudgetInput(String(value))
+
+    const el = amountRef.current
+    if (el) {
+      el.classList.remove('pulse-scale')
+      void el.offsetWidth
+      el.classList.add('pulse-scale')
+      window.setTimeout(() => el.classList.remove('pulse-scale'), 220)
+    }
   }
 
   function handleBudgetInputChange(e) {
@@ -201,6 +212,7 @@ export default function QuizScreen({ onComplete }) {
     const step = item.step
     const StepIcon = step.icon
     const percent = ((sliderValue - step.min) / (step.max - step.min)) * 100
+    const projectedProfit = sliderValue * (answers.yield?.value ?? 0) * 0.1
 
     return (
       <div className="min-h-[100dvh] flex flex-col px-5 pt-6 pb-8 bg-white relative">
@@ -228,7 +240,7 @@ export default function QuizScreen({ onComplete }) {
           <h2 className="text-[21px] leading-snug font-bold text-slate-900 mb-8">{step.question}</h2>
 
           <div className="flex flex-col items-center">
-            <div className="flex items-center gap-1 mb-7">
+            <div ref={amountRef} className="flex items-center gap-1 mb-7">
               <span className="text-[32px] font-extrabold text-blue-600">$</span>
               <input
                 type="text"
@@ -257,6 +269,13 @@ export default function QuizScreen({ onComplete }) {
               <span className="text-[12px] text-slate-400">${step.min}</span>
               <span className="text-[12px] text-slate-400">${step.max}</span>
             </div>
+
+            <p className="text-[12px] text-slate-400 mt-4 text-center">
+              Ориентировочная прибыль в год:{' '}
+              <span className="text-sky-400 font-semibold">
+                ${currencyFormatter.format(projectedProfit)}
+              </span>
+            </p>
           </div>
         </div>
 

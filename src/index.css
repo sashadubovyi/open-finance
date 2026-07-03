@@ -67,3 +67,19 @@
   border-radius: 9999px;
   background: transparent;
 }
+
+@keyframes digit-pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse-scale {
+  animation: digit-pulse 220ms ease-out;
+}
