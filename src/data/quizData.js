@@ -73,11 +73,10 @@ const budgetStep = {
   key: 'budget',
   icon: Rocket,
   question: 'Какую сумму вы готовы выделить для тестового старта, чтобы увидеть первую прибыль уже через 24 часа?',
-  options: [
-    { label: 'Около $100 – $250', hint: 'Попробовать с минимальной суммы', value: 250 },
-    { label: '$500 – $1,500', hint: 'Начать уверенно', value: 1500 },
-    { label: 'От $3,000 и выше', hint: 'Создать серьезный капитал', value: 3000 },
-  ],
+  min: 100,
+  max: 1000,
+  step: 100,
+  defaultValue: 500,
 }
 
 const fact1 = {
@@ -115,7 +114,7 @@ export const QUIZ_FLOW = [
   { type: 'question', step: horizonStep },
   { type: 'question', step: yieldStep },
   { type: 'fact', fact: fact3 },
-  { type: 'question', step: budgetStep },
+  { type: 'slider', step: budgetStep },
 ]
 
 export const FACT_ICON = Lightbulb

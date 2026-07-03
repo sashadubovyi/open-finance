@@ -14,6 +14,8 @@ export default function QuizScreen({ onComplete }) {
   const [transitioning, setTransitioning] = useState(false)
   const [justConfirmed, setJustConfirmed] = useState(false)
   const [marketVisibleCount, setMarketVisibleCount] = useState(0)
+  const [sliderValue, setSliderValue] = useState(0)
+  const [budgetInput, setBudgetInput] = useState('')
 
   const item = QUIZ_FLOW[flowIndex]
   const isLast = flowIndex === QUIZ_FLOW.length - 1
@@ -36,6 +38,39 @@ export default function QuizScreen({ onComplete }) {
     setJustConfirmed(true)
 
     window.setTimeout(() => advance(nextAnswers), CONFIRM_DELAY_MS)
+  }
+
+  useEffect(() => {
+    if (item.type !== 'slider') return undefined
+    const initial = answers[item.step.key]?.value ?? item.step.defaultValue
+    setSliderValue(initial)
+    setBudgetInput(String(initial))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flowIndex])
+
+  function handleSliderChange(e) {
+    const value = Number(e.target.value)
+    setSliderValue(value)
+    setBudgetInput(String(value))
+  }
+
+  function handleBudgetInputChange(e) {
+    setBudgetInput(e.target.value.replace(/[^\d]/g, ''))
+  }
+
+  function handleBudgetInputBlur() {
+    const { min, max, step } = item.step
+    let value = Number(budgetInput)
+    if (!Number.isFinite(value)) value = min
+    value = Math.round((value - min) / step) * step + min
+    value = Math.min(max, Math.max(min, value))
+    setSliderValue(value)
+    setBudgetInput(String(value))
+  }
+
+  function confirmSlider() {
+    if (transitioning) return
+    selectOption({ label: `$${sliderValue.toLocaleString('en-US')}`, value: sliderValue })
   }
 
   useEffect(() => {
@@ -158,6 +193,90 @@ export default function QuizScreen({ onComplete }) {
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
+      </div>
+    )
+  }
+
+  if (item.type === 'slider') {
+    const step = item.step
+    const StepIcon = step.icon
+    const percent = ((sliderValue - step.min) / (step.max - step.min)) * 100
+
+    return (
+      <div className="min-h-[100dvh] flex flex-col px-5 pt-6 pb-8 bg-white relative">
+        <div className="flex items-center gap-3 mb-6">
+          {flowIndex > 0 && (
+            <button
+              type="button"
+              onClick={goBack}
+              aria-label="Назад"
+              className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-white border border-slate-200 shadow-sm active:scale-95 transition-transform"
+            >
+              <ChevronLeft className="w-4 h-4 text-slate-500" />
+            </button>
+          )}
+          <div className="flex-1">
+            <ProgressBar step={flowIndex + 1} total={QUIZ_FLOW.length} />
+          </div>
+        </div>
+
+        <div key={step.key} className="flex-1 flex flex-col animate-fade-slide-up">
+          <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 mb-5">
+            <StepIcon className="w-6 h-6 text-blue-600" strokeWidth={1.75} />
+          </div>
+
+          <h2 className="text-[21px] leading-snug font-bold text-slate-900 mb-8">{step.question}</h2>
+
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-1 mb-7">
+              <span className="text-[32px] font-extrabold text-blue-600">$</span>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={budgetInput}
+                onChange={handleBudgetInputChange}
+                onBlur={handleBudgetInputBlur}
+                aria-label="Введите сумму"
+                className="w-36 bg-transparent text-[40px] font-extrabold text-slate-900 tabular-nums text-center border-b-2 border-slate-200 focus:border-blue-500 transition-colors"
+              />
+            </div>
+
+            <input
+              type="range"
+              min={step.min}
+              max={step.max}
+              step={step.step}
+              value={sliderValue}
+              onChange={handleSliderChange}
+              aria-label="Сумма тестового старта"
+              className="budget-slider w-full accent-blue-600"
+              style={{ background: `linear-gradient(to right, #2563eb ${percent}%, #e2e8f0 ${percent}%)` }}
+            />
+
+            <div className="flex items-center justify-between w-full mt-2">
+              <span className="text-[12px] text-slate-400">${step.min}</span>
+              <span className="text-[12px] text-slate-400">${step.max}</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={confirmSlider}
+          disabled={transitioning}
+          className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-sky-400 py-4 text-[14px] font-bold tracking-wide text-white shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-transform disabled:opacity-70"
+        >
+          Продолжить
+        </button>
+
+        {justConfirmed && (
+          <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center animate-fade-slide-up">
+            <div className="flex items-center gap-2 rounded-full bg-emerald-600 text-white px-4 py-2 shadow-lg shadow-emerald-600/25">
+              <CheckCircle2 className="w-4 h-4" strokeWidth={2} />
+              <span className="text-[13px] font-semibold">Ответ сохранён</span>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
