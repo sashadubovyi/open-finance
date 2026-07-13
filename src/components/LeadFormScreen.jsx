@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import { Clock, User, Phone, Mail, Loader2, Lock } from 'lucide-react'
+import { Clock, User, Phone, Mail, Lock } from 'lucide-react'
 import { useCountdown } from '../hooks/useCountdown.js'
 import { formatPhoneInput, isValidPhone } from '../utils/phoneMask.js'
-import { submitLead } from '../utils/submitLead.js'
 
-export default function LeadFormScreen({ answers, onSubmitted }) {
+export default function LeadFormScreen({ onSubmitted }) {
   const { formatted, secondsLeft } = useCountdown(13 * 60)
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState({})
-  const [submitting, setSubmitting] = useState(false)
 
   function validate() {
     const nextErrors = {}
@@ -21,31 +19,10 @@ export default function LeadFormScreen({ answers, onSubmitted }) {
     return Object.keys(nextErrors).length === 0
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
-    if (submitting) return
     if (!validate()) return
-
-    setSubmitting(true)
-
-    const payload = {
-      name: name.trim(),
-      phone,
-      email: email.trim(),
-      goal: answers.goal?.label ?? '',
-      experience: answers.experience?.label ?? '',
-      instruments: answers.instruments?.label ?? '',
-      time: answers.time?.label ?? '',
-      horizon: answers.horizon?.label ?? '',
-      yieldExpectation: answers.yield?.label ?? '',
-      budget: answers.budget?.label ?? '',
-    }
-
-    try {
-      await submitLead(payload)
-    } finally {
-      onSubmitted({ name: name.trim(), phone, email: email.trim() })
-    }
+    onSubmitted({ name: name.trim(), phone, email: email.trim() })
   }
 
   return (
@@ -119,14 +96,9 @@ export default function LeadFormScreen({ answers, onSubmitted }) {
 
         <button
           type="submit"
-          disabled={submitting}
-          className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-sky-400 py-4 text-[14px] font-bold tracking-wide text-white shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-transform disabled:opacity-70"
+          className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-sky-400 py-4 text-[14px] font-bold tracking-wide text-white shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-transform"
         >
-          {submitting ? (
-            <Loader2 className="w-5 h-5 animate-spin" strokeWidth={2.5} />
-          ) : (
-            'ПОЛУЧИТЬ СТРАТЕГИЮ И НАЧАТЬ ЗАРАБАТЫВАТЬ'
-          )}
+          ПОЛУЧИТЬ СТРАТЕГИЮ И НАЧАТЬ ЗАРАБАТЫВАТЬ
         </button>
 
         <p className="flex items-center justify-center gap-1.5 text-[12px] text-slate-400 mt-1">

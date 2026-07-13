@@ -63,12 +63,14 @@ function buildTelegramMessage(data) {
   var horizon = escapeValue(data.horizon)
   var yieldExpectation = escapeValue(data.yieldExpectation)
   var budget = escapeValue(data.budget)
+  var codeword = escapeValue(data.codeword)
 
   return (
     '=== НОВАЯ ЗАЯВКА: ФИНАНСОВЫЙ ПЛАН ===\n' +
     'Имя: ' + name + '\n' +
     'Телефон: ' + phone + '\n' +
     'E-mail: ' + email + '\n' +
+    'КОДОВОЕ СЛОВО: ' + codeword + '\n' +
     '---------------------------------\n' +
     'Цель доходности: ' + goal + '\n' +
     'Опыт в инвестициях: ' + experience + '\n' +

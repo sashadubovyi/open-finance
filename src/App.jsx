@@ -3,6 +3,7 @@ import HeroScreen from './components/HeroScreen.jsx'
 import QuizScreen from './components/QuizScreen.jsx'
 import LoadingScreen from './components/LoadingScreen.jsx'
 import LeadFormScreen from './components/LeadFormScreen.jsx'
+import BonusScreen from './components/BonusScreen.jsx'
 import ResultScreen from './components/ResultScreen.jsx'
 
 const SCREENS = {
@@ -10,6 +11,7 @@ const SCREENS = {
   QUIZ: 'quiz',
   LOADING: 'loading',
   FORM: 'form',
+  BONUS: 'bonus',
   RESULT: 'result',
 }
 
@@ -35,11 +37,18 @@ export default function App() {
 
       {screen === SCREENS.FORM && (
         <LeadFormScreen
-          answers={answers}
           onSubmitted={(leadData) => {
             setLead(leadData)
-            setScreen(SCREENS.RESULT)
+            setScreen(SCREENS.BONUS)
           }}
+        />
+      )}
+
+      {screen === SCREENS.BONUS && (
+        <BonusScreen
+          answers={answers}
+          lead={lead}
+          onSubmitted={() => setScreen(SCREENS.RESULT)}
         />
       )}
 
